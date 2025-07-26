@@ -17,22 +17,10 @@ const app = express();
 // Серверийн портын дугаарыг тохируулах (орчны хувьсагчаас авах, байхгүй бол 5005)
 const PORT = process.env.PORT || 5005;
 
-// CORS middleware ашиглах - фронтенд домэйнийг зөвшөөрөх
+// CORS middleware ашиглах - бүх домэйныг түр зөвшөөрөх
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-
-      // Allow localhost for development
-      if (origin.includes('localhost')) return callback(null, true);
-
-      // Allow all vercel.app domains
-      if (origin.includes('vercel.app')) return callback(null, true);
-
-      // Reject other origins
-      callback(new Error('Not allowed by CORS'));
-    },
+    origin: true, // Allow all origins temporarily
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
