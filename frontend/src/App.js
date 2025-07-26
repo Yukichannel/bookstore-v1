@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// API URL configuration - fallback to localhost for development
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
+
+console.log('API_URL:', API_URL); // Debug log to see what URL is being used
 
 function App() {
   const [books, setBooks] = useState([]);
