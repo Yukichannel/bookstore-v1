@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
+
 function App() {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState('');
@@ -10,7 +12,7 @@ function App() {
   // Номын жагсаалтыг авах функц
   const fetchBooks = async () => {
     try {
-      const response = await axios.get('http://localhost:5005/api/books');
+      const response = await axios.get(`${API_URL}/api/books`);
       setBooks(response.data);
     } catch (error) {
       console.error('Номын жагсаалтыг авахад алдаа гарлаа:', error);
@@ -25,10 +27,7 @@ function App() {
     e.preventDefault();
     const newBook = { title, author, year: Number(year) }; // year-ийг Number болгож өгнө
     try {
-      const response = await axios.post(
-        'http://localhost:5005/api/books',
-        newBook
-      );
+      const response = await axios.post(`${API_URL}/api/books`, newBook);
       console.log('Ном амжилттай нэмэгдлээ:', response.data);
       fetchBooks();
       setTitle('');
@@ -43,7 +42,7 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5005/api/books/${id}`);
+      await axios.delete(`${API_URL}/api/books/${id}`);
       fetchBooks();
     } catch (error) {
       console.error('Ном устгахад алдаа гарлаа:', error);
