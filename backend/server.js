@@ -17,8 +17,15 @@ const app = express();
 // Серверийн портын дугаарыг тохируулах (орчны хувьсагчаас авах, байхгүй бол 5005)
 const PORT = process.env.PORT || 5005;
 
-// CORS middleware ашиглах
-app.use(cors());
+// CORS middleware ашиглах - фронтенд домэйнийг зөвшөөрөх
+app.use(cors({
+  origin: [
+    'http://localhost:3000', // Local development
+    'https://6-3-4-bookstore-4-4ryh.vercel.app', // Production frontend
+    'https://6-3-4-bookstore-4-git-master-hellobraincodes-projects.vercel.app' // Git branch deployments
+  ],
+  credentials: true
+}));
 
 // JSON хүсэлтийг зөвшөөрөх middleware
 app.use(express.json());
