@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-// API URL configuration - pointing to deployed backend
+// API URL configuration - pointing to deployed backend (NO trailing slash)
 const API_URL =
   process.env.REACT_APP_API_URL || 'https://6-3-4-bookstore-4-phi.vercel.app';
 
