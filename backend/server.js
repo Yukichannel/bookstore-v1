@@ -20,11 +20,19 @@ const PORT = process.env.PORT || 5005;
 // CORS middleware ашиглах - фронтенд домэйнийг зөвшөөрөх
 app.use(
   cors({
-    origin: [
-      'http://localhost:3000', // Local development
-      'https://6-3-4-bookstore-4-4ryh.vercel.app', // Production frontend
-      'https://6-3-4-bookstore-4-git-master-hellobraincodes-projects.vercel.app', // Git branch deployments
-    ],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Allow localhost for development
+      if (origin.includes('localhost')) return callback(null, true);
+
+      // Allow all vercel.app domains
+      if (origin.includes('vercel.app')) return callback(null, true);
+
+      // Reject other origins
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
