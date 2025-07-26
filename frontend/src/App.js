@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // API URL configuration - pointing to deployed backend
 const API_URL =
-  process.env.REACT_APP_API_URL || 'https://6-3-4-bookstore-4-bo3w.vercel.app';
+  process.env.REACT_APP_API_URL || 'https://6-3-4-bookstore-4-phi.vercel.app';
 
 console.log('API_URL:', API_URL); // Debug log to see what URL is being used
 
