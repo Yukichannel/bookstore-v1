@@ -18,17 +18,33 @@ const app = express();
 const PORT = process.env.PORT || 5005;
 
 // CORS middleware ашиглах - фронтенд домэйнийг зөвшөөрөх
-app.use(cors({
-  origin: [
-    'http://localhost:3000', // Local development
-    'https://6-3-4-bookstore-4-4ryh.vercel.app', // Production frontend
-    'https://6-3-4-bookstore-4-git-master-hellobraincodes-projects.vercel.app' // Git branch deployments
-  ],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000', // Local development
+      'https://6-3-4-bookstore-4-4ryh.vercel.app', // Production frontend
+      'https://6-3-4-bookstore-4-git-master-hellobraincodes-projects.vercel.app', // Git branch deployments
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`, req.body);
+  next();
+});
 
 // JSON хүсэлтийг зөвшөөрөх middleware
 app.use(express.json());
+
+// Test route for debugging
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API is working!', timestamp: new Date() });
+});
+
 // /api/books замд bookRoutes-г ашиглах
 app.use('/api/books', bookRoutes);
 
