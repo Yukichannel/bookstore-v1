@@ -79,7 +79,7 @@ function App() {
         <h1>
           <span className="icon icon-book"></span>
           Номын дэлгүүр
-          <span className="version">v1.0.0</span>
+          <span className="version">v1.1.0</span>
         </h1>
         <p>Таны дуртай номуудын жагсаалтыг үүсгээрэй</p>
       </header>
